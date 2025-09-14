@@ -1,27 +1,25 @@
-#include <stdio.h>
-#include <string.h>
-#include <ctype.h>
+//remove all the vowels from the array
 
-int isVowel(char ch) {
-    ch = tolower(ch);  // handle uppercase too
-    return (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u');
-}
+#include <iostream>
+using namespace std;
 
 int main() {
-    char str[100];
-    int i, j = 0;
+    string str;
+    cout << "Enter a string: ";
+    getline(cin, str);   // input lenge
 
-    printf("Enter a string: ");
-    fgets(str, sizeof(str), stdin);
+    cout << "String without vowels: ";
+    for (int i = 0; i < str.length(); i++) {
+        char ch = str[i];
 
-    for (i = 0; str[i] != '\0'; i++) {
-        if (!isVowel(str[i])) {
-            str[j++] = str[i];  // keep non-vowel characters
+        // 
+        if (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u' ||
+            ch == 'A' || ch == 'E' || ch == 'I' || ch == 'O' || ch == 'U') {
+            continue; // skip yeh characters
         }
-    }
-    str[j] = '\0'; // null-terminate the modified string
 
-    printf("String after removing vowels: %s\n", str);
+        cout << ch; // print kro only non-vowels
+    }
 
     return 0;
 }
