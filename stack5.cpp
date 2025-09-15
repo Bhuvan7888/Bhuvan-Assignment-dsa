@@ -1,34 +1,24 @@
 #include <iostream>
 #include <stack>
-#include <cctype>
-#include <cmath>
+#include <string>
 using namespace std;
 
-
-int applyOp(int a, int b, char op) {
-    switch (op) {
-        case '+': return a + b;
-        case '-': return a - b;
-        case '*': return a * b;
-        case '/': return a / b;
-        case '^': return pow(a, b);
-    }
-    return 0;
-}
-
-
-int evaluatePostfix(string postfix) {
+int evaluatePostfix(const string& expr) {
     stack<int> s;
 
-    for (char c : postfix) {
-        if (isdigit(c)) {
-            s.push(c - '0');   
-        }
-        else {
+    for (char c : expr) {
+        if (c >= '0' && c <= '9') {   // check if digit hai ya nhi
+            s.push(c - '0');          // convert kro character to integer
+        } else {
             int b = s.top(); s.pop();
             int a = s.top(); s.pop();
-            int result = applyOp(a, b, c);
-            s.push(result);
+
+            switch (c) {
+                case '+': s.push(a + b); break;
+                case '-': s.push(a - b); break;
+                case '*': s.push(a * b); break;
+                case '/': s.push(a / b); break;
+            }
         }
     }
 
@@ -37,7 +27,7 @@ int evaluatePostfix(string postfix) {
 
 int main() {
     string postfix;
-    cout << "Enter postfix expression (use digits only): ";
+    cout << "Enter postfix expression (digits only): ";
     cin >> postfix;
 
     cout << "Result = " << evaluatePostfix(postfix) << endl;
